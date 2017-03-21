@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import reducer from './reducers';
+import reducer from './reducer';
 import Profile from './components/profile/index';
 
 const store = createStore(
@@ -17,4 +17,4 @@ render(
     <Profile />
   </Provider>,
   document.getElementById('root'),
-)
+);
