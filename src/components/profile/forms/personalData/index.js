@@ -10,7 +10,11 @@ export class PersonalDataForm extends React.Component {
   constructor(props) {
     super(props);
 
+    const { first_name, last_name } = this.props;
+
     this.state = {
+      first_name,
+      last_name,
       processing: false,
       errors: {},
     };
@@ -22,46 +26,23 @@ export class PersonalDataForm extends React.Component {
   onSubmit(event) {
     event.preventDefault();
 
-    if (this.validate()) {
-      this.setState({
-        processing: true,
-      });
 
-      const { first_name, last_name } = this.state;
-
-      this.props.dispatch(saveProfile({ first_name, last_name }))
-        .then(
-          () => {
-            this.props.onFinishEdit();
-          },
-          (error) => {
-            this.setState({
-              processing: false,
-              errors: {
-
-              }
-            })
-          }
-        );
-    }
-  }
-
-  validate(){
-    const errors = {};
-
-    ['first_name', 'last_name'].forEach((fieldName) => {
-      if (!this.state[fieldName])
-        errors[fieldName] = 'Заполните поле';
+    this.setState({
+      processing: true,
     });
 
-    if (Object.keys(errors).length > 0) {
-      this.setState({
-        errors,
-      });
-      return false;
-    } else {
-      return true;
-    }
+    const { first_name, last_name } = this.state;
+
+    this.props.dispatch(saveProfile({ first_name, last_name }))
+      .then(
+        () => this.props.onFinishEdit(),
+        (error) => {
+          this.setState({
+            processing: false,
+            errors: {}
+          })
+        }
+      );
   }
 
   onFieldChange(event) {
@@ -78,15 +59,15 @@ export class PersonalDataForm extends React.Component {
 
     return (
       <ProfileFrom onFinishEdit={this.props.onFinishEdit} onSubmit={this.onSubmit}>
-        <ProfileField name="first_name" type="text" title="Имя" value={this.props.first_name} onChange={this.onFieldChange}  error={errors.first_name} />
-        <ProfileField name="last_name" type="text" title="Фамилия" value={this.props.last_name} onChange={this.onFieldChange} error={errors.last_name} />
+        <ProfileField name="first_name" type="text" title="Имя" value={this.state.first_name} onChange={this.onFieldChange}  error={errors.first_name} />
+        <ProfileField name="last_name" type="text" title="Фамилия" value={this.state.last_name} onChange={this.onFieldChange} error={errors.last_name} />
       </ProfileFrom>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { first_name, last_name } = state.profile;
+  const { first_name, last_name } = state.profile.data;
   return {
     first_name,
     last_name

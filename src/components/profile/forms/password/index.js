@@ -19,6 +19,16 @@ export class PasswordForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  onFieldChange(event) {
+    const fieldName = event.target.name;
+    
+    this.setState({
+      [fieldName]: event.target.value,
+      errors: {}
+    });
+  }
+
+
   onSubmit(event) {
     event.preventDefault();
 
@@ -27,16 +37,14 @@ export class PasswordForm extends React.Component {
         processing: true,
       });
 
-      this.props.dispatch(changePassword)
+      this.props.dispatch(changePassword(this.state.oldPassword, this.state.newPassword))
         .then(
-          () => {
-            this.props.onFinishEdit();
-          },
+          () => this.props.onFinishEdit(),
           (error) => {
             this.setState({
               processing: false,
               errors: {
-                password: error.oldPassword
+                oldPassword: error.old_password
               }
             })
           }
@@ -47,7 +55,7 @@ export class PasswordForm extends React.Component {
   validate(){
     const errors = {};
 
-    ['password', 'newPassword', 'newPasswordRepeat'].forEach((fieldName) => {
+    ['oldPassword', 'newPassword', 'newPasswordRepeat'].forEach((fieldName) => {
       if (!this.state[fieldName])
         errors[fieldName] = 'Заполните поле';
     });
@@ -70,21 +78,12 @@ export class PasswordForm extends React.Component {
     }
   }
 
-  onFieldChange(event) {
-    const fieldName = event.target.name;
-    
-    this.setState({
-      [fieldName]: event.target.value,
-      errors: {}
-    });
-  }
-
   render() {
     const errors = this.state.errors;
 
     return (
       <ProfileFrom onFinishEdit={this.props.onFinishEdit} onSubmit={this.onSubmit}>
-        <ProfileField name="password" type="password" title="Текущий" onChange={this.onFieldChange}  error={errors.password} />
+        <ProfileField name="oldPassword" type="password" title="Текущий" onChange={this.onFieldChange}  error={errors.oldPassword} />
         <ProfileField name="newPassword" type="password" title="Новый" onChange={this.onFieldChange} error={errors.newPassword} />
         <ProfileField name="newPasswordRepeat" type="password" title="Подтверждение нового пароля" onChange={this.onFieldChange} error={errors.newPasswordRepeat}/>
       </ProfileFrom>

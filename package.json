@@ -2,6 +2,7 @@
   "name": "profile",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://dev.quantify.world",
   "devDependencies": {
     "react-scripts": "0.9.5"
   },

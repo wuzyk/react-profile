@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.profile-field__input {
+.profile-field__error {
   color: red;
   padding: 0.5rem 0;
 }

@@ -1,16 +1,40 @@
-.profile-item {
-  padding: 1rem;
-}
-
 .profile-item__header {
   display: flex;
-  padding: 1rem 0;
+  padding: 0.5rem;
+}
+
+.profile-item--empty .profile-item__header:hover {
+  cursor: pointer;
+  background: blue;
 }
 
 .profile-item__title {
-  width: 150px;
+  width: 200px;
+  color: #999;
+}
+
+.profile-item--empty .profile-item__title {
+  color: blue;
+}
+
+.profile-item--empty .profile-item__title::before {
+  display: inline-block;
+  content: '+';
+  margin-right: 0.5rem;
+}
+
+.profile-item--empty .profile-item__header:hover .profile-item__title {
+  color: white;
 }
 
 .profile-item__value {
   width: 200px;
+}
+
+.profile-item:not(:hover) .profile-item__edit-button {
+  display: none;
+}
+
+.profile-item__form {
+  padding: 0.5rem;
 }

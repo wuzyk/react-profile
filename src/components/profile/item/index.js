@@ -21,16 +21,20 @@ export default class ProfileItem extends React.Component {
   }
 
   render() {
+    const { title, value } = this.props;
     const Form = this.props.form;
+    const edit = this.state.edit;
 
     return (
-      <div className="profile-item">
-        <div className="profile-item__header">
-          <div className="profile-item__title">{this.props.title}</div>
-          <div className="profile-item__value">{this.props.value}</div>
-          {!this.state.edit && Form && <a href="#" className="profile-item__edit-button" onClick={this.startEdit}>Edit</a>}
+      <div 
+        className={'profile-item' + (!value && !edit ? ' profile-item--empty' : '')} 
+      >
+        <div className="profile-item__header" onClick={this.startEdit}>
+          <div className="profile-item__title">{title}</div>
+          {!edit && <div className="profile-item__value">{value}</div>}
+          {!edit && value && <a href="#" className="profile-item__edit-button" onClick={this.startEdit}>Edit</a>}
         </div>
-        {this.state.edit && Form &&
+        {edit && Form &&
           <div className="profile-item__form">
             <Form onFinishEdit={this.finishEdit}/>
           </div>
