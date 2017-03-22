@@ -27,7 +27,9 @@ export class PersonalDataForm extends React.Component {
         processing: true,
       });
 
-      this.props.dispatch(saveProfile)
+      const { first_name, last_name } = this.state;
+
+      this.props.dispatch(saveProfile({ first_name, last_name }))
         .then(
           () => {
             this.props.onFinishEdit();
