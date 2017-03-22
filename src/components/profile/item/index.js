@@ -1,11 +1,13 @@
 import React from 'react';
 
+import './index.css';
+
 export default class ProfileItem extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      edit: true
+      edit: false
     };
 
     this.startEdit = this.setEdit.bind(this, true);
@@ -23,9 +25,11 @@ export default class ProfileItem extends React.Component {
 
     return (
       <div className="profile-item">
-        <div className="profile-item__title">{this.props.title}</div>
-        <div className="profile-item__value">{this.props.value}</div>
-        <a href="#" className="profile-item__edit-button" onClick={this.startEdit}>Edit</a>
+        <div className="profile-item__header">
+          <div className="profile-item__title">{this.props.title}</div>
+          <div className="profile-item__value">{this.props.value}</div>
+          {!this.state.edit && Form && <a href="#" className="profile-item__edit-button" onClick={this.startEdit}>Edit</a>}
+        </div>
         {this.state.edit && Form &&
           <div className="profile-item__form">
             <Form onFinishEdit={this.finishEdit}/>

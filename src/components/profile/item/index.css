@@ -1,0 +1,16 @@
+.profile-item {
+  padding: 1rem;
+}
+
+.profile-item__header {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.profile-item__title {
+  width: 150px;
+}
+
+.profile-item__value {
+  width: 200px;
+}

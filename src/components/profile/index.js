@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import { fetchProfile } from './actions';
 import ProfileItem from './item/index';
 import PasswordForm from './forms/password/index';
-
-function mapStateToProps(state) {
-  return {
-    ...state.profile
-  };
-}
+import PersonalDataForm from './forms/personalData/index';
 
 export class Profile extends React.Component {
   componentDidMount() {
@@ -22,12 +17,16 @@ export class Profile extends React.Component {
     return (
       <div className="profile">
         <ProfileItem title="Пароль" value="Не менялся" form={PasswordForm}/>
-        <ProfileItem title="Персональные данные" value={(first_name || last_name) && `${first_name} ${last_name}`} />
+        <ProfileItem title="Персональные данные" value={(first_name || last_name) && `${first_name} ${last_name}`} form={PersonalDataForm} />
       </div>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-)(Profile);
+function mapStateToProps(state) {
+  return {
+    ...state.profile
+  };
+}
+
+export default connect(mapStateToProps)(Profile);

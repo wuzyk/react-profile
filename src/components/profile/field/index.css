@@ -1,0 +1,21 @@
+.profile-field {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.profile-field__title {
+  width: 30%;
+}
+
+.profile-field__input {
+  width: 70%;
+}
+
+.profile-field__input input {
+  width: 100%;
+}
+
+.profile-field__input {
+  color: red;
+  padding: 0.5rem 0;
+}

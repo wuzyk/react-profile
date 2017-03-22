@@ -1,0 +1,11 @@
+.profile-form {
+  max-width: 30rem;
+}
+
+.profile-form__buttons {
+  text-align: right;
+}
+
+.profile-form__button {
+  margin-left: 1rem;
+}
