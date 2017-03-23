@@ -29,9 +29,11 @@ const saveProfileFailure = data => ({
 
 export const fetchProfile = dispatch => {
   dispatch(requestProfile);
-  return fetch(`data/profile.json`)
-    .then(response => response.json())
-    .then(json => dispatch(receiveProfile(json)));
+  return fetch(`http://dev.quantify.world/api/users/profile/`, {
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => dispatch(receiveProfile(json.data)));
 };
 
 export const saveProfile = data => dispatch => {
